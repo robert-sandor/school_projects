@@ -6,6 +6,9 @@
 #define OOP_LAB11_INGREDIENT_H
 
 #include "string"
+#include "istream"
+#include "ostream"
+#include "sstream"
 
 class Ingredient {
 public:
@@ -52,6 +55,33 @@ public:
 
     Ingredient &operator=(Ingredient other);
 
+    friend std::ostream &operator<<(std::ostream &os, const Ingredient &ing) {
+        return os << ing.toSTDString();
+    }
+
+    friend std::istream &operator>>(std::istream &is, Ingredient &ing) {
+        std::string line{}, token{};
+
+        std::getline(is, line);
+        std::istringstream iss(line);
+
+        std::getline(iss, token, ':');
+        unsigned int i;
+        std::istringstream(token) >> i;
+        ing._id = i;
+
+        std::getline(iss, token, ':');
+        ing.set_name(token);
+
+        std::getline(iss, token, ':');
+        ing.set_provider(token);
+
+        std::getline(iss, token, ':');
+        std::istringstream(token) >> i;
+        ing.set_quantity(i);
+
+        return is;
+    }
 private:
     unsigned int _id;
     std::string _name;
