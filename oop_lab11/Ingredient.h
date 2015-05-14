@@ -45,13 +45,13 @@ public:
         Ingredient::_quantity = _quantity;
     }
 
-    const std::string &toSTDString() const {
+    const std::string toSTDString() const {
         return std::to_string(_id) + " : " + _name + " : " + _provider + " : " + std::to_string(_quantity);
     }
 
-    inline bool operator==(const Ingredient &rhs, const Ingredient &lhs) const;
+    inline bool operator==(const Ingredient &lhs);
 
-    inline bool operator!=(const Ingredient &rhs, const Ingredient &lhs) const;
+    inline bool operator!=(const Ingredient &lhs);
 
     Ingredient &operator=(Ingredient other);
 
@@ -82,6 +82,7 @@ public:
 
         return is;
     }
+
 private:
     unsigned int _id;
     std::string _name;

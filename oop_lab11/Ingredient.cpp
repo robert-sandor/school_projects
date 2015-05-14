@@ -4,12 +4,12 @@
 
 #include "Ingredient.h"
 
-bool Ingredient::operator==(const Ingredient &rhs, const Ingredient &lhs) const {
-    return rhs._id == lhs._id;
+bool Ingredient::operator==(const Ingredient &lhs) {
+    return _id == lhs._id;
 }
 
-bool Ingredient::operator!=(const Ingredient &rhs, const Ingredient &lhs) const {
-    return rhs._id != lhs._id;
+bool Ingredient::operator!=(const Ingredient &lhs) {
+    return _id != lhs._id;
 }
 
 Ingredient &Ingredient::operator=(Ingredient other) {
