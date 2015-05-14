@@ -2,9 +2,6 @@
 
 using namespace std;
 
-int main() {
-    // github test comment
-    // fuck this shit man
-    cout << "Hello, World!" << endl;
+int main(int, char **) {
     return 0;
 }
