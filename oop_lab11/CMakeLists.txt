@@ -9,8 +9,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ${warnings}")
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-set(SOURCE_FILES main.cpp)
-add_executable(oop_lab11 ${SOURCE_FILES} Ingredient.cpp Ingredient.h)
+# Locate Qt5
+find_package(Qt5Widgets REQUIRED)
 
-add_executable(oop_lab11_test test.cpp)
-target_link_libraries(oop_lab11_test ${GTEST_LIBRARIES} pthread)
+
+set(SOURCE_FILES main.cpp)
+add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWindow.cpp MainWindow.h)
+target_link_libraries(main_app Qt5::Widgets)
+
+add_executable(tests test.cpp)
+target_link_libraries(tests ${GTEST_LIBRARIES} pthread)
