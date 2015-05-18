@@ -11,10 +11,12 @@ include_directories(${GTEST_INCLUDE_DIRS})
 
 # Locate Qt5
 find_package(Qt5Widgets REQUIRED)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
 
 
 set(SOURCE_FILES main.cpp)
-add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWindow.cpp MainWindow.h)
+add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWIndow.cpp MainWIndow.h)
 target_link_libraries(main_app Qt5::Widgets)
 
 add_executable(tests test.cpp)
