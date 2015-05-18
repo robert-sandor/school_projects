@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 
 void MainWindow::setUpUI () {
-    // Create the horizontal box and set it as the central widget
+    // Create the horizontal box and set it as the central layout
     _mainHBox = new QHBoxLayout ( this );
     setLayout ( _mainHBox );
 
@@ -16,4 +16,7 @@ void MainWindow::setUpUI () {
     // Create the TableView and add it to the left VBox
     _tableView = new QTableView ( this );
     _leftVBox->addWidget ( _tableView );
+
+    _rightForm = new QFormLayout ( this );
+    _mainHBox->addLayout ( _rightForm );
 }

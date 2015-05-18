@@ -9,7 +9,9 @@
 
 class MainWindow : public QMainWindow {
 public:
-    MainWindow ( QWidget * parent = NULL, const Qt::WindowFlags & flags = 0 ) : QMainWindow ( parent, flags ) { }
+    MainWindow ( QWidget * parent = NULL, const Qt::WindowFlags & flags = 0 ) : QMainWindow ( parent, flags ) {
+        setUpUI ();
+    }
 
     virtual ~MainWindow () { }
 
@@ -20,6 +22,7 @@ private:
     QHBoxLayout * _mainHBox;
     QVBoxLayout * _leftVBox;
     QTableView * _tableView;
+    QFormLayout * _rightForm;
 
 };
 
