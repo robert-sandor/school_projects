@@ -16,7 +16,7 @@ set(CMAKE_AUTOMOC ON)
 
 
 set(SOURCE_FILES main.cpp)
-add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWIndow.cpp MainWIndow.h)
+add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWindow.cpp MainWindow.h)
 target_link_libraries(main_app Qt5::Widgets)
 
 add_executable(tests test.cpp)
