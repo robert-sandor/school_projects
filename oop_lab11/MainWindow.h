@@ -6,10 +6,7 @@
 #define OOP_LAB11_MAINWINDOW_H
 
 
-#include <QtWidgets/qwidget.h>
-#include <QtWidgets/qboxlayout.h>
-#include <QtWidgets/qformlayout.h>
-#include <QtWidgets/qtableview.h>
+#include "QtWidgets"
 
 class MainWindow : public QWidget {
 Q_OBJECT
@@ -27,14 +24,31 @@ private:
 
     // Main Layout
     QHBoxLayout * _mainLayout;
-    // Left & right placeholders
-    QWidget * _leftPlaceholder;
-    QWidget * _rightPlaceholder;
     // Left & right layouts
-    QVBoxLayout * _leftLayout;
-    QFormLayout * _rightLayout;
+    QVBoxLayout * _leftBoxLayout;
+    QFormLayout * _rightFormLayout;
+
+    // right layout - the form
+    QLineEdit * _idLineEdit;
+    QLineEdit * _nameLineEdit;
+    QLineEdit * _providerLineEdit;
+    QLineEdit * _quantityLineEdit;
+    QHBoxLayout * _formActionsLayout;
+    QPushButton * _addButton;
+    QPushButton * _updateButton;
+    QHBoxLayout * _filterByValueLayout;
+    QLineEdit * _filterByValueLE;
+    QPushButton * _filterByValueButton;
+    QHBoxLayout * _filterByNameLayout;
+    QLineEdit * _filterByNameLE;
+    QPushButton * _filterByNameButton;
+
     // TableView
     QTableView * _table;
+    QHBoxLayout * _tableActionsLayout;
+    QPushButton * _deleteButton;
+    QPushButton * _showAllButton;
+
 };
 
 
