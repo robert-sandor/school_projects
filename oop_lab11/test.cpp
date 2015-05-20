@@ -2,6 +2,9 @@
 // Created by robert on 5/14/15.
 //
 
-int main ( int, char ** ) {
-    return 0;
+#include "gtest/gtest.h"
+
+int main ( int argc, char ** argv ) {
+    testing::InitGoogleTest ( &argc, argv );
+    return RUN_ALL_TESTS ();
 }

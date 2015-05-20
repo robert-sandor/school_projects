@@ -12,9 +12,11 @@
 
 class Ingredient {
 public:
+    Ingredient ()
+        : _id ( 0 ), _name ( "" ), _provider ( "" ), _quantity ( 0 ) { }
+
     Ingredient ( unsigned int _id, const std::string & _name, const std::string & _provider, unsigned int _quantity )
-        : _id (
-        _id ), _name ( _name ), _provider ( _provider ), _quantity ( _quantity ) { }
+        : _id ( _id ), _name ( _name ), _provider ( _provider ), _quantity ( _quantity ) { }
 
     virtual ~Ingredient () { }
 
@@ -47,14 +49,25 @@ public:
     }
 
     const std::string toSTDString () const {
-        return std::to_string ( _id ) + " : " + _name + " : " + _provider + " : " + std::to_string ( _quantity );
+        return std::to_string ( _id ) + ":" + _name + ":" + _provider + ":" + std::to_string ( _quantity );
     }
 
-    inline bool operator== ( const Ingredient & lhs );
+    friend bool operator== ( const Ingredient & rhs, const Ingredient & lhs ) {
+        return rhs._id == lhs._id;
+    }
 
-    inline bool operator!= ( const Ingredient & lhs );
+    friend bool operator!= ( const Ingredient & rhs, const Ingredient & lhs ) {
+        return rhs._id != lhs._id;
+    }
 
-    Ingredient & operator= ( Ingredient other );
+    Ingredient & operator= ( const Ingredient & other ) {
+        _id = other._id;
+        _name = other._name;
+        _provider = other._provider;
+        _quantity = other._quantity;
+
+        return *this;
+    }
 
     friend std::ostream & operator<< ( std::ostream & os, const Ingredient & ing ) {
         return os << ing.toSTDString ();

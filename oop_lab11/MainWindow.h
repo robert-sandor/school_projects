@@ -13,6 +13,7 @@ Q_OBJECT
 
 public:
     MainWindow ( QWidget * parent, const Qt::WindowFlags & f ) : QWidget ( parent, f ) {
+//        setGeometry (x (), y (), 640, 480);
         setupUI ();
         setWindowTitle ( "Ingredient Store" );
     }
