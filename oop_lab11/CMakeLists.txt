@@ -16,8 +16,8 @@ set(CMAKE_AUTOMOC ON)
 
 
 set(SOURCE_FILES main.cpp)
-add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWindow.cpp MainWindow.h )
+add_executable(main_app ${SOURCE_FILES} Ingredient.cpp Ingredient.h MainWindow.cpp MainWindow.h IngredientMemoryRepository.cpp IngredientMemoryRepository.h)
 target_link_libraries(main_app Qt5::Widgets)
 
-add_executable(tests test.cpp test_ingredient.cpp)
+add_executable(tests test.cpp test_ingredient.cpp IngredientMemoryRepository.cpp IngredientMemoryRepository.h test_memory_repository.cpp)
 target_link_libraries(tests ${GTEST_LIBRARIES} pthread)

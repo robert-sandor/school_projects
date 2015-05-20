@@ -55,7 +55,7 @@ TEST_F ( IngredientTest, TestOperators ) {
     Ingredient b ( 2, "c", "b", 2 );
     ASSERT_NE ( a, b );
 
-    // Assignement and equality
+    // Assignment and equality
     b = a;
     ASSERT_EQ ( a, b );
 
