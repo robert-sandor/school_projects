@@ -7,6 +7,8 @@
 
 #include "IngredientMemoryRepository.h"
 #include "string"
+#include "sstream"
+#include "fstream"
 
 class IngredientFileRepository : public IngredientMemoryRepository {
 public:
