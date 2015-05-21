@@ -23,6 +23,7 @@ protected:
 TEST_F ( IMRTest, testAdd ) {
     _repo->add ( {1, "A", "B", 2} );
     ASSERT_EQ ( _repo->get_elements ().size (), 3 );
+    ASSERT_ANY_THROW ( _repo->add ( {10, "a", "b", 20} ));
 }
 
 TEST_F ( IMRTest, testRemove ) {

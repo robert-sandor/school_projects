@@ -5,6 +5,12 @@
 #include "IngredientMemoryRepository.h"
 
 const Ingredient & IngredientMemoryRepository::add ( const Ingredient & element ) {
+    if ( _elements.end () != std::find ( _elements.begin (), _elements.end (), element )) {
+        throw std::runtime_error {"duplicate_element"};
+    }
+
+    validator.validate ( element );
+
     addToUndo ();
     _elements.push_back ( element );
     return *(std::find ( _elements.begin (), _elements.end (), element ));
@@ -13,7 +19,7 @@ const Ingredient & IngredientMemoryRepository::add ( const Ingredient & element 
 void IngredientMemoryRepository::remove ( const Ingredient & element ) {
     std::vector <Ingredient>::iterator it = std::find ( _elements.begin (), _elements.end (), element );
     if ( it == _elements.end ()) {
-        throw IngredientMemoryRepositoryException ( "element_not_found" );
+        throw std::runtime_error {"element_not_found"};
     }
 
     addToUndo ();
@@ -23,7 +29,7 @@ void IngredientMemoryRepository::remove ( const Ingredient & element ) {
 
 void IngredientMemoryRepository::remove ( const size_t & position ) {
     if ( position >= _elements.size ()) {
-        throw IngredientMemoryRepositoryException ( "index_out_of_range" );
+        throw std::runtime_error {"index_out_of_range"};
     }
 
     addToUndo ();
@@ -34,8 +40,10 @@ void IngredientMemoryRepository::remove ( const size_t & position ) {
 void IngredientMemoryRepository::update ( const Ingredient & oldElement, const Ingredient & newElement ) {
     std::vector <Ingredient>::iterator it = std::find ( _elements.begin (), _elements.end (), oldElement );
     if ( it == _elements.end ()) {
-        throw IngredientMemoryRepositoryException ( "element_not_found" );
+        throw std::runtime_error {"element_not_found"};
     }
+
+    validator.validate ( newElement );
 
     addToUndo ();
 
@@ -44,8 +52,10 @@ void IngredientMemoryRepository::update ( const Ingredient & oldElement, const I
 
 void IngredientMemoryRepository::update ( const size_t & position, const Ingredient & newElement ) {
     if ( position >= _elements.size ()) {
-        throw IngredientMemoryRepositoryException ( "index_out_of_range" );
+        throw std::runtime_error {"index_out_of_range"};
     }
+
+    validator.validate ( newElement );
 
     addToUndo ();
 
@@ -54,7 +64,7 @@ void IngredientMemoryRepository::update ( const size_t & position, const Ingredi
 
 const Ingredient & IngredientMemoryRepository::get ( const size_t & position ) const {
     if ( position >= _elements.size ()) {
-        throw IngredientMemoryRepositoryException ( "index_out_of_range" );
+        throw std::runtime_error {"index_out_of_range"};
     }
 
     return _elements.at ( position );
@@ -62,7 +72,7 @@ const Ingredient & IngredientMemoryRepository::get ( const size_t & position ) c
 
 void IngredientMemoryRepository::undo () {
     if ( _undoList.size () == 0 ) {
-        throw IngredientMemoryRepositoryException ( "no_more_undo" );
+        throw std::runtime_error {"no_more_undo"};
     }
 
     _elements = _undoList.back ();

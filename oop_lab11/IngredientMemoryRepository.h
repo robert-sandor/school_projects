@@ -8,18 +8,8 @@
 #include "vector"
 #include "algorithm"
 #include "Ingredient.h"
-#include "exception"
-
-class IngredientMemoryRepositoryException : public std::exception {
-
-public:
-    IngredientMemoryRepositoryException ( const std::string & _message ) : _message ( _message ) { }
-
-    virtual ~IngredientMemoryRepositoryException () { }
-
-private:
-    std::string _message;
-};
+#include "stdexcept"
+#include "IngredientValidator.h"
 
 class IngredientMemoryRepository {
 
@@ -49,6 +39,7 @@ public:
 private:
     std::vector <Ingredient> _elements;
     std::vector <std::vector <Ingredient>> _undoList;
+    const IngredientValidator validator;
 
     void addToUndo ();
 };
