@@ -21,10 +21,19 @@ public:
 
     QVariant headerData ( int section, Qt::Orientation orientation, int role ) const;
 
-    void set_data_source ( IngredientController * controller );
+    Ingredient & get ( unsigned int index ) {
+        return _data.at ( index );
+    }
+
+    void set_data ( const std::vector <Ingredient> & _data ) {
+        IngredientModel::_data = _data;
+        emit dataChanged ( index ( 0, 0 ), index (( int ) _data.size (), 3 ));
+        emit layoutChanged ();
+    }
 
 private:
     IngredientController * _controller;
+    std::vector <Ingredient> _data;
 };
 
 

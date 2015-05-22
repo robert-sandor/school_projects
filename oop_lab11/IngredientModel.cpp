@@ -9,7 +9,7 @@ IngredientModel::IngredientModel ( QObject * parent ) : QAbstractTableModel ( pa
 }
 
 int IngredientModel::rowCount ( const QModelIndex & ) const {
-    return ( int ) _controller->getAllIngredients ().size ();
+    return ( int ) _data.size ();
 }
 
 int IngredientModel::columnCount ( const QModelIndex & ) const {
@@ -18,7 +18,7 @@ int IngredientModel::columnCount ( const QModelIndex & ) const {
 
 QVariant IngredientModel::data ( const QModelIndex & index, int role ) const {
     if ( role == Qt::DisplayRole ) {
-        Ingredient ing = _controller->getAllIngredients ().at ( index.row ());
+        Ingredient ing = _data.at (( unsigned ) index.row ());
         switch ( index.column ()) {
             case 0: {
                 return QString ( "%1" ).arg ( ing.get_id ());
@@ -38,10 +38,6 @@ QVariant IngredientModel::data ( const QModelIndex & index, int role ) const {
         }
     }
     return QVariant {};
-}
-
-void IngredientModel::set_data_source ( IngredientController * controller ) {
-    _controller = controller;
 }
 
 QVariant IngredientModel::headerData ( int section, Qt::Orientation orientation, int role ) const {

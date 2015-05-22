@@ -5,7 +5,7 @@
 #ifndef OOP_LAB11_MAINWINDOW_H
 #define OOP_LAB11_MAINWINDOW_H
 
-
+#include "iostream"
 #include "QtWidgets"
 #include "IngredientController.h"
 #include "IngredientModel.h"
@@ -16,7 +16,7 @@ Q_OBJECT
 public:
     MainWindow ( QWidget * parent, const Qt::WindowFlags & f, IngredientController * con ) : QWidget ( parent, f ),
                                                                                              _controller ( con ) {
-        setGeometry ( 0, 0, 960, 480 );
+        setGeometry ( 0, 0, 880, 300 );
         setupUI ();
         setWindowTitle ( "Ingredient Store" );
     }
@@ -27,11 +27,36 @@ public:
 //        _controller = controller;
 //    }
 
+private slots:
+
+    void add_clicked ();
+
+    void update_clicked ();
+
+    void show_all_clicked ();
+
+    void delete_clicked ();
+
+    void undo_clicked ();
+
+    void selection_changed ( QModelIndex selected, QModelIndex deselected );
+
+    void section_clicked ( int index );
+
+    void filter_by_name_clicked ();
+
+    void filter_by_quantity_clicked ();
+
 private:
     void setupUI ();
 
+    bool tableSorted;
+
+    Ingredient _selectedIngredient;
+
     IngredientController * _controller;
     IngredientModel * _ingModel;
+    QSortFilterProxyModel * _ingProxyModel;
 
     // Main Layout
     QHBoxLayout * _mainLayout;
@@ -47,9 +72,9 @@ private:
     QHBoxLayout * _formActionsLayout;
     QPushButton * _addButton;
     QPushButton * _updateButton;
-    QHBoxLayout * _filterByValueLayout;
-    QLineEdit * _filterByValueLE;
-    QPushButton * _filterByValueButton;
+    QHBoxLayout * _filterByQuantityLayout;
+    QLineEdit * _filterByQuantityLE;
+    QPushButton * _filterByQuantityButton;
     QHBoxLayout * _filterByNameLayout;
     QLineEdit * _filterByNameLE;
     QPushButton * _filterByNameButton;
@@ -58,6 +83,7 @@ private:
     QTableView * _table;
     QHBoxLayout * _tableActionsLayout;
     QPushButton * _deleteButton;
+    QPushButton * _undoButton;
     QPushButton * _showAllButton;
 
 };

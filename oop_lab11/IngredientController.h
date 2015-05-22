@@ -34,6 +34,10 @@ public:
 
     std::vector <Ingredient> getFilteredByName ( const std::string & name ) const;
 
+    void undo () {
+        _repo->undo ();
+    }
+
 private:
     IngredientMemoryRepository * _repo;
 };
