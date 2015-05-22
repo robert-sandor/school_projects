@@ -13,6 +13,9 @@ void MainWindow::setupUI () {
     _rightFormLayout = new QFormLayout;
     _leftBoxLayout = new QVBoxLayout;
     _table = new QTableView;
+    _ingModel = new IngredientModel {NULL};
+    _ingModel->set_data_source ( _controller );
+    _table->setModel ( _ingModel );
     _formActionsLayout = new QHBoxLayout;
     _addButton = new QPushButton ( tr ( "&Add" ));
     _updateButton = new QPushButton ( tr ( "&Update" ));

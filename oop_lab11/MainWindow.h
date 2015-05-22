@@ -7,21 +7,31 @@
 
 
 #include "QtWidgets"
+#include "IngredientController.h"
+#include "IngredientModel.h"
 
 class MainWindow : public QWidget {
 Q_OBJECT
 
 public:
-    MainWindow ( QWidget * parent, const Qt::WindowFlags & f ) : QWidget ( parent, f ) {
-//        setGeometry (x (), y (), 640, 480);
+    MainWindow ( QWidget * parent, const Qt::WindowFlags & f, IngredientController * con ) : QWidget ( parent, f ),
+                                                                                             _controller ( con ) {
+        setGeometry ( 0, 0, 960, 480 );
         setupUI ();
         setWindowTitle ( "Ingredient Store" );
     }
 
     virtual ~MainWindow () { }
 
+//    void set_controller ( IngredientController * controller ) {
+//        _controller = controller;
+//    }
+
 private:
     void setupUI ();
+
+    IngredientController * _controller;
+    IngredientModel * _ingModel;
 
     // Main Layout
     QHBoxLayout * _mainLayout;
