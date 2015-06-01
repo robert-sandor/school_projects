@@ -35,7 +35,7 @@ public:
 
     virtual void prev () = 0;
 
-    TElem *get_current () const {
+    virtual TElem *get_current () const {
         return _current;
     }
 
