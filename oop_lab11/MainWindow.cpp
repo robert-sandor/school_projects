@@ -19,7 +19,7 @@ void MainWindow::setupUI () {
     _ingModel->set_data ( _controller->getAllIngredients ());
     _ingProxyModel = new QSortFilterProxyModel;
     _ingProxyModel->setSourceModel ( _ingModel );
-    _table->setModel ( _ingProxyModel );
+    _table->setModel ( _ingModel );
     _formActionsLayout = new QHBoxLayout;
     _addButton = new QPushButton ( tr ( "&Add" ));
     _updateButton = new QPushButton ( tr ( "&Update" ));
