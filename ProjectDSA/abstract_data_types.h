@@ -46,7 +46,7 @@ protected:
 template < typename TElem >
 class ASortedList {
 public:
-    virtual TElem & get_at_index ( const unsigned int & index ) const = 0;
+//    virtual TElem & get_at_index ( const unsigned int & index ) const = 0;
 
     virtual void add ( const TElem & element ) = 0;
 
