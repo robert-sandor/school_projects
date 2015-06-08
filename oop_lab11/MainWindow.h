@@ -5,6 +5,7 @@
 #ifndef OOP_LAB11_MAINWINDOW_H
 #define OOP_LAB11_MAINWINDOW_H
 
+#include "memory"
 #include "iostream"
 #include "QtWidgets"
 #include "IngredientController.h"
@@ -21,7 +22,8 @@ public:
         setWindowTitle ( "Ingredient Store" );
     }
 
-    virtual ~MainWindow () { }
+    virtual ~MainWindow () {
+    }
 
 //    void set_controller ( IngredientController * controller ) {
 //        _controller = controller;
@@ -54,7 +56,8 @@ private:
 
     Ingredient _selectedIngredient;
 
-    IngredientController * _controller;
+//    IngredientController * _controller;
+    std::unique_ptr<IngredientController> _controller;
     IngredientModel * _ingModel;
     QSortFilterProxyModel * _ingProxyModel;
 

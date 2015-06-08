@@ -5,7 +5,7 @@
 #ifndef OOP_LAB11_INGREDIENTCONTROLLER_H
 #define OOP_LAB11_INGREDIENTCONTROLLER_H
 
-
+#include "memory"
 #include "IngredientMemoryRepository.h"
 
 class IngredientController {
@@ -39,7 +39,8 @@ public:
     }
 
 private:
-    IngredientMemoryRepository * _repo;
+//    IngredientMemoryRepository * _repo;
+    std::unique_ptr<IngredientMemoryRepository> _repo;
 };
 
 

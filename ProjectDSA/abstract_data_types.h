@@ -11,7 +11,7 @@
 template < typename TElem >
 class AIterator {
 public:
-    AIterator ( ) : _current ( 0 ) { }
+    AIterator () : _current ( 0 ) { }
 
     virtual ~AIterator () { }
 
@@ -23,17 +23,11 @@ public:
 
     virtual AIterator & operator++ () = 0;
 
-    virtual AIterator & operator-- () = 0;
-
     virtual AIterator & operator+ ( const int & value ) = 0;
-
-    virtual AIterator & operator- ( const int & value ) = 0;
 
     virtual TElem & operator* () const = 0;
 
     virtual void next () = 0;
-
-    virtual void prev () = 0;
 
     virtual TElem *get_current () const {
         return _current;
@@ -46,13 +40,9 @@ protected:
 template < typename TElem >
 class ASortedList {
 public:
-//    virtual TElem & get_at_index ( const unsigned int & index ) const = 0;
-
     virtual void add ( const TElem & element ) = 0;
 
-    virtual void remove_from_index ( const unsigned int & index ) = 0;
-
-    virtual unsigned int get_index ( const TElem & element ) = 0;
+    virtual void remove ( const TElem & element ) = 0;
 
     virtual unsigned int get_count () const = 0;
 

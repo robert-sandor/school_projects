@@ -38,7 +38,7 @@ void IngredientMemoryRepository::remove ( const size_t & position ) {
 }
 
 void IngredientMemoryRepository::update ( const Ingredient & oldElement, const Ingredient & newElement ) {
-    std::vector <Ingredient>::iterator it = std::find ( _elements.begin (), _elements.end (), oldElement );
+    auto it = std::find ( _elements.begin (), _elements.end (), oldElement );
     if ( it == _elements.end ()) {
         throw std::runtime_error {"element_not_found"};
     }

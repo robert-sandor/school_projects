@@ -7,11 +7,13 @@
 
 #include "vector"
 #include "map"
-
+#include "stack"
 
 class Graph {
 public:
     Graph ( unsigned int number_of_vertices );
+
+    Graph ( const Graph & other );
 
     virtual ~Graph () { }
 
@@ -25,9 +27,17 @@ public:
 
     const std::map < unsigned int, unsigned int > & get_inbounds ( const unsigned int & to ) const;
 
-    unsigned int get_size () const {
+    unsigned long vertex_count () const {
+        return _vertices.size ();
+    }
+
+    unsigned long edge_count () const {
         return _size;
     }
+
+    bool tarjan_dag_check ();
+
+    std::vector < uint > topological_sort ();
 
 private:
 
@@ -39,7 +49,9 @@ private:
 
 private:
     std::vector < Vertex > _vertices;
-    unsigned int _size;
+    unsigned long _size;
+
+    bool tarjan_dag_check_util ( uint u, int disc[], int low[], std::stack < int > *st, bool stackMember[] );
 };
 
 

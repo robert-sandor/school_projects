@@ -27,7 +27,13 @@ void IngredientFileRepository::load_file () {
         std::getline ( iss, token, ':' );
         unsigned int quantity{( unsigned ) std::atoi ( token.c_str ())};
 
-        add ( {id, name, provider, quantity} );
+        auto ing_add = [&] () {
+            Ingredient i {id, name, provider, quantity};
+            add (i);
+        };
+
+        ing_add ();
+//        add ( {id, name, provider, quantity} );
     };
 
     in.close ();

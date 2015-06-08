@@ -5,122 +5,71 @@
 #ifndef PROJECTDSA_SORTEDLISTRBT_H
 #define PROJECTDSA_SORTEDLISTRBT_H
 
-#include "cstdlib"
 #include "abstract_data_types.h"
 
-template < typename TElem >
-class SortedListRBT : ASortedList < TElem > {
+template < typename TComparable >
+class SortedListRBT : ASortedList < TComparable > {
 public:
-    enum Color {
-        RED, BLACK
-    };
-
-    class iterator : public AIterator < TElem > {
+    class iterator : AIterator < TComparable > {
     public:
-        iterator () { }
+        iterator (SortedListRBT < TComparable >::Node * root) : _root (root) {}
 
-        iterator ( TElem *ptr ) {
-            this->_current = ptr;
-        }
+        virtual ~iterator ( );
 
-        virtual ~iterator () { }
+        virtual AIterator & operator= ( const AIterator & other );
 
-        virtual SortedListRBT::iterator & operator= ( const AIterator < TElem > & other ) override;
+        virtual bool operator== ( const AIterator & other ) const;
 
-        SortedListRBT::iterator & operator= ( const SortedListRBT::iterator & other );
+        virtual bool operator!= ( const AIterator & other ) const;
 
-        virtual bool operator== ( const AIterator < TElem > & other ) const override;
+        virtual AIterator & operator++ ();
 
-        virtual bool operator!= ( const AIterator < TElem > & other ) const override;
+        virtual AIterator & operator+ ( const int & value );
 
-        virtual SortedListRBT::iterator & operator++ () override;
+        virtual TComparable & operator* () const;
 
-        virtual SortedListRBT::iterator & operator-- () override;
+        virtual void next ();
 
-        virtual SortedListRBT::iterator & operator+ ( const int & value ) override;
-
-        virtual SortedListRBT::iterator & operator- ( const int & value ) override;
-
-        virtual TElem & operator* () const override;
-
-        virtual void next () override;
-
-        virtual void prev () override;
-    };
-
-private:
-    class Node {
-    public:
-        Node ( TElem _data, const Color & _color, Node *_parent, Node *_left, Node *_right ) : _data ( _data ),
-                                                                                               _color ( _color ),
-                                                                                               _parent ( _parent ),
-                                                                                               _left ( _left ),
-                                                                                               _right ( _right ) { }
-
-        Node () { }
-
-        TElem data () const {
-            return _data;
-        }
-
-        void set_data ( TElem _data ) {
-            Node::_data = _data;
-        }
-
-        Node *left () const {
-            return _left;
-        }
-
-        void set_left ( Node *_left ) {
-            Node::_left = _left;
-        }
-
-        Node *right () const {
-            return _right;
-        }
-
-        void set_right ( Node *_right ) {
-            Node::_right = _right;
-        }
-
-        const Color & color () const {
-            return _color;
-        }
-
-        void set_color ( const Color & _color ) {
-            Node::_color = _color;
-        }
-
-        Node *parent () const {
-            return _parent;
-        }
-
-        void set_parent ( Node *_parent ) {
-            Node::_parent = _parent;
+        virtual TComparable *get_current () const {
+            return this->_current;
         }
 
     private:
-        TElem _data;
-        Color _color;
-        Node *_parent;
-        Node *_left;
-        Node *_right;
+        SortedListRBT < TComparable >::Node *_root;
+        SortedListRBT < TComparable >::Node *_cn;
+        SortedListDV < Node * > _visited;
+    };
+
+private:
+    enum Color {
+        BLACK = 0, RED = 1
+    };
+
+    class Node {
+    public:
+        Node ( TComparable data ) : data ( data ) {
+            red = RED;
+            link[ 0 ] = link[ 1 ] = nullptr;
+        }
+
+        virtual ~Node () { }
+
+        Color red;
+        TComparable data;
+        Node *link[2];
     };
 
 public:
+
     SortedListRBT () {
         _root = nullptr;
     }
 
     virtual ~SortedListRBT () { }
 
-//    virtual TElem & get_at_index ( const unsigned int & index ) const override;
+    virtual void add ( const TComparable & element ) override;
 
-    virtual void add ( const TElem & element ) override;
-
-    virtual void remove_from_index ( const unsigned int & index ) override;
-
-    virtual unsigned int get_index ( const TElem & element ) override;
+    virtual void remove ( const TComparable & element ) override;
 
     virtual unsigned int get_count () const override;
 
@@ -131,294 +80,286 @@ public:
     }
 
 private:
-    void left_rotate ( Node *pt );
-
-    void right_rotate ( Node *pt );
-
-    void fix_up ( Node *x );
-
-private:
     Node *_root;
-    Node *_begin;
-    Node *_end;
 
+    int is_red ( Node *root ) {
+        return root != NULL && root->red == 1;
+    }
 
+    Node *insert_r ( Node *root, const TComparable & data );
+
+    Node *remove_r ( Node *root, TComparable data, int *done );
+
+    Node *remove_balance ( Node *root, int dir, int *done );
+
+    int rb_assert ( Node *root );
+
+    Node *single_rotation ( Node *root, int dir ) {
+        Node *save = root->link[ !dir ];
+
+        root->link[ !dir ] = save->link[ dir ];
+        save->link[ dir ] = root;
+
+        root->red = RED;
+        save->red = BLACK;
+
+        return save;
+    }
+
+    Node *double_rotation ( Node *root, int dir ) {
+        root->link[ !dir ] = single_rotation ( root->link[ !dir ], !dir );
+
+        return single_rotation ( root, dir );
+    }
 };
 
-/*
- * --------------------------------------------------------------------------------------------------------------------|
- * SortedListRBT methods
- * --------------------------------------------------------------------------------------------------------------------|
- */
+template < typename TComparable >
+void SortedListRBT < TComparable >::add ( const TComparable & element ) {
+    this->_root = insert_r ( this->_root, element );
+    this->_root->red = BLACK;
 
-//template < typename TElem >
-//TElem & SortedListRBT < TElem >::get_at_index ( const unsigned int & index ) const {
-//    return this->_root->data ();
-//}
+    rb_assert ( this->_root );
+}
 
-template < typename TElem >
-void SortedListRBT < TElem >::add ( const TElem & element ) {
-    Node *root = this->_root;
-    Node *pred = nullptr;
+template < typename TComparable >
+void SortedListRBT < TComparable >::remove ( const TComparable & element ) {
+    int done = 0;
 
-    while ( root != nullptr ) {
-        pred = root;
+    this->_root = remove_r ( this->_root, element, &done );
 
-        if ( root->data () > element ) {
-            root = root->left ();
-        }
-        else if ( root->data () < element ) {
-            root = root->right ();
-        }
+    if ( this->_root != nullptr ) {
+        this->_root->red = BLACK;
     }
+}
 
-    Node *n = new Node ( element, RED, pred, nullptr, nullptr );
+template < typename TComparable >
+typename SortedListRBT < TComparable >::Node *SortedListRBT < TComparable >::insert_r (
+        SortedListRBT < TComparable >::Node *root, const TComparable & data ) {
 
-    if ( pred == nullptr ) {
-        this->_root = n;
-        this->_root->set_color ( BLACK );
+    if ( root == nullptr ) {
+        root = new SortedListRBT < TComparable >::Node ( data );
     }
     else {
-        if ( element < pred->data ()) {
-            pred->set_left ( n );
-        }
-        else {
-            pred->set_right ( n );
-        }
+        int dir = root->data < data;
 
-        fix_up ( n );
-    }
-}
+        root->link[ dir ] = insert_r ( root->link[ dir ], data );
 
-template < typename TElem >
-void SortedListRBT < TElem >::remove_from_index ( const unsigned int & index ) {
-
-}
-
-template < typename TElem >
-unsigned int SortedListRBT < TElem >::get_index ( const TElem & element ) {
-    return 0;
-}
-
-template < typename TElem >
-unsigned int SortedListRBT < TElem >::get_count () const {
-    return 0;
-}
-
-template < typename TElem >
-bool SortedListRBT < TElem >::is_empty () const {
-    return false;
-}
-
-template < typename TElem >
-void SortedListRBT < TElem >::left_rotate ( SortedListRBT < TElem >::Node *pt ) {
-    // y stores pointer of the right child of x
-    Node *pt_right = pt->right ();
-
-    // store y's left subtree's pointer as x's right child
-    pt->set_right ( pt_right->left ());
-
-    // update parent pointer of x's right child
-    if ( pt->right () != nullptr ) {
-        pt->right ()->set_parent ( pt );
-    }
-
-    // update y's parent pointer
-    pt_right->set_parent ( pt->parent ());
-
-    // if x's parent is nullptr make y root
-    if ( pt->parent () == nullptr ) {
-        this->_root = pt_right;
-    }
-        // store y at the place of x
-    else if ( pt == pt->parent ()->left ()) {
-        pt->parent ()->set_left ( pt_right );
-    }
-    else {
-        pt->parent ()->set_right ( pt_right );
-    }
-
-    // make x the right child of y
-    pt_right->set_left ( pt );
-
-    // make y the parent of x
-    pt->set_parent ( pt_right );
-}
-
-template < typename TElem >
-void SortedListRBT < TElem >::right_rotate ( SortedListRBT < TElem >::Node *pt ) {
-    // x stores pointer to the left child of y
-    Node *pt_left = pt->left ();
-
-    // store x's right subtree's pointer as y's left child
-    pt->set_left ( pt_left->right ());
-
-    // update parent pointer of x's right child
-    if ( pt->left () != nullptr ) {
-        pt->left ()->set_parent ( pt );
-    }
-
-    // update x's parent pointer
-    pt_left->set_parent ( pt->parent ());
-
-    // if x's parent is nullptrptr make it root
-    if ( pt->parent () == nullptr ) {
-        this->_root = pt_left;
-    }
-        // store x at the place of y
-    else if ( pt == pt->parent ()->left ()) {
-        pt->parent ()->set_left ( pt_left );
-    }
-    else {
-        pt->parent ()->set_right ( pt_left );
-    }
-
-    // make y the right child of x
-    pt_left->set_right ( pt );
-
-    // make x the parent of y
-    pt->set_parent ( pt_left );
-}
-
-template < typename TElem >
-void SortedListRBT < TElem >::fix_up ( SortedListRBT < TElem >::Node *pt ) {
-    Node *parent_pt = nullptr;
-    Node *grand_parent_pt = nullptr;
-
-    while (( pt != this->_root ) && ( pt->color () != BLACK ) && ( pt->parent ()->color () == RED )) {
-        parent_pt = pt->parent ();
-        grand_parent_pt = pt->parent ()->parent ();
-
-        // case A
-
-        if ( parent_pt == grand_parent_pt->left ()) {
-            Node *uncle_pt = grand_parent_pt->right ();
-
-            // case 1
-
-            if ( uncle_pt != nullptr && uncle_pt->color () == RED ) {
-                grand_parent_pt->set_color ( RED );
-                parent_pt->set_color ( BLACK );
-                uncle_pt->set_color ( BLACK );
-                pt = grand_parent_pt;
+        if ( is_red ( root->link[ dir ] )) {
+            if ( is_red ( root->link[ !dir ] )) {
+                root->red = RED;
+                root->link[ 0 ]->red = BLACK;
+                root->link[ 1 ]->red = BLACK;
             }
-
             else {
-                // case 2
-                if ( pt == parent_pt->right ()) {
-                    left_rotate ( parent_pt );
-                    pt = parent_pt;
-                    parent_pt = pt->parent ();
+                if ( is_red ( root->link[ dir ]->link[ dir ] )) {
+                    root = single_rotation ( root, !dir );
+                }
+                else if ( is_red ( root->link[ dir ]->link[ !dir ] )) {
+                    root = double_rotation ( root, !dir );
+                }
+            }
+        }
+    }
+
+    return root;
+}
+
+template < typename TComparable >
+typename SortedListRBT < TComparable >::Node *SortedListRBT < TComparable >::remove_r (
+        SortedListRBT < TComparable >::Node *root, TComparable data, int *done ) {
+
+    if ( root == nullptr ) {
+        *done = 1;
+    }
+    else {
+        int dir;
+
+        if ( root->data == data ) {
+            if ( root->link[ 0 ] == nullptr || root->link[ 1 ] == nullptr ) {
+                Node *save = root->link[ root->link[ 0 ] == nullptr ];
+
+                if ( is_red ( root )) {
+                    *done = 1;
+                }
+                else if ( is_red ( save )) {
+                    save->red = BLACK;
+                    *done = 1;
                 }
 
-                // case 3
-                right_rotate ( grand_parent_pt );
-                Color c = grand_parent_pt->color ();
-                grand_parent_pt->set_color ( parent_pt->color ());
-                parent_pt->set_color ( c );
-                pt = parent_pt;
+                delete root;
+                return save;
             }
-        }
-
-            // case B
-
-        else {
-            Node *uncle_pt = grand_parent_pt->left ();
-
-            // case 1
-
-            if (( uncle_pt != nullptr ) && ( uncle_pt->color () == RED )) {
-                grand_parent_pt->set_color ( RED );
-                parent_pt->set_color ( BLACK );
-                uncle_pt->set_color ( BLACK );
-                pt = grand_parent_pt;
-            }
-
-                // case 2
-
             else {
-                if ( pt == parent_pt->left ()) {
-                    right_rotate ( parent_pt );
-                    pt = parent_pt;
-                    parent_pt = pt->parent ();
+                Node *heir = root->link[ 0 ];
+
+                while ( heir->link[ 1 ] != nullptr ) {
+                    heir = heir->link[ 1 ];
                 }
 
-                // case 3
-                left_rotate ( grand_parent_pt );
-                Color c = grand_parent_pt->color ();
-                grand_parent_pt->set_color ( parent_pt->color ());
-                parent_pt->set_color ( c );
-                pt = parent_pt;
+                root->data = heir->data;
+                data = heir->data;
             }
+
+        }
+
+        dir = root->data < data;
+        root->link[ dir ] = remove_r ( root->link[ dir ], data, done );
+
+        if ( !*done ) {
+            root = remove_balance ( root, dir, done );
         }
     }
 
-    this->_root->set_color ( BLACK );
+    return root;
 }
 
-/*
- * --------------------------------------------------------------------------------------------------------------------|
- * Iterator methods
- * --------------------------------------------------------------------------------------------------------------------|
- */
+template < typename TComparable >
+typename SortedListRBT < TComparable >::Node *SortedListRBT < TComparable >::remove_balance (
+        SortedListRBT < TComparable >::Node *root, int dir, int *done ) {
 
-template < typename TElem >
-typename SortedListRBT < TElem >::iterator & SortedListRBT < TElem >::iterator::operator= (
-        const AIterator < TElem > & other ) {
-    return *this;
+    Node *p = root;
+    Node *s = root->link[ !dir ];
+
+    if ( s != nullptr && !is_red ( s )) {
+        if ( !is_red ( s->link[ 0 ] ) && !is_red ( s->link[ 1 ] )) {
+            if ( is_red ( p )) {
+                *done = 1;
+            }
+
+            p->red = BLACK;
+            s->red = RED;
+        }
+        else {
+            Color save = root->red;
+
+            if ( is_red ( s->link[ !dir ] )) {
+                p = single_rotation ( p, dir );
+            }
+            else {
+                p = double_rotation ( p, dir );
+            }
+
+            p->red = save;
+            p->link[ 0 ]->red = BLACK;
+            p->link[ 1 ]->red = BLACK;
+            *done = 1;
+        }
+    }
+    else if ( s->link[ dir ] != nullptr ) {
+        Node *r = s->link[ dir ];
+
+        if ( !is_red ( r->link[ 0 ] ) && !is_red ( r->link[ 1 ] )) {
+            p = single_rotation ( p, dir );
+            p->link[ dir ]->link[ !dir ]->red = RED;
+        }
+        else {
+            if ( is_red ( r->link[ dir ] )) {
+                s->link[ dir ] = single_rotation ( r, !dir );
+            }
+
+            p = double_rotation ( p, dir );
+            s->link[ dir ]->red = BLACK;
+            p->link[ dir ]->red = RED;
+        }
+
+        p->red = BLACK;
+        p->link[ dir ]->red = BLACK;
+        *done = 1;
+    }
+
+    return p;
 }
 
-template < typename TElem >
-bool SortedListRBT < TElem >::iterator::operator== ( const AIterator < TElem > & other ) const {
-    return false;
+template < typename TComparable >
+int SortedListRBT < TComparable >::rb_assert ( SortedListRBT < TComparable >::Node *root ) {
+    int lh, rh;
+
+    if ( root == NULL ) {
+        return 1;
+    }
+    else {
+        Node *ln = root->link[ 0 ];
+        Node *rn = root->link[ 1 ];
+
+        if ( is_red ( root )) {
+            if ( is_red ( ln ) || is_red ( rn )) {
+                throw std::runtime_error ( "Red violation!" );
+            }
+        }
+
+        lh = rb_assert ( ln );
+        rh = rb_assert ( rn );
+
+        if (( ln != nullptr && ln->data > root->data ) || ( rn != nullptr && rn->data < root->data )) {
+            throw std::runtime_error ( "Binary search tree violation!" );
+        }
+
+        if ( lh != 0 && rh != 0 && lh != rh ) {
+            throw std::runtime_error ( "Black violation!" );
+        }
+
+        if ( lh != 0 && rh != 0 ) {
+            return is_red ( root ) ? lh : lh + 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }
 
-template < typename TElem >
-bool SortedListRBT < TElem >::iterator::operator!= ( const AIterator < TElem > & other ) const {
-    return false;
+
+template < typename TComparable >
+unsigned int SortedListRBT < TComparable >::get_count () const {
+    return this->_count;
 }
 
-template < typename TElem >
-typename SortedListRBT < TElem >::iterator & SortedListRBT < TElem >::iterator::operator++ () {
-    return *this;
+template < typename TComparable >
+bool SortedListRBT < TComparable >::is_empty () const {
+    return this->_root == nullptr;
 }
 
-template < typename TElem >
-typename SortedListRBT < TElem >::iterator & SortedListRBT < TElem >::iterator::operator-- () {
-    return *this;
-}
-
-template < typename TElem >
-typename SortedListRBT < TElem >::iterator & SortedListRBT < TElem >::iterator::operator+ ( const int & value ) {
-    return *this;
-}
-
-template < typename TElem >
-typename SortedListRBT < TElem >::iterator & SortedListRBT < TElem >::iterator::operator- ( const int & value ) {
-    return *this;
-}
-
-template < typename TElem >
-TElem & SortedListRBT < TElem >::iterator::operator* () const {
-    return *this->_current;
-}
-
-template < typename TElem >
-void SortedListRBT < TElem >::iterator::next () {
+template < typename TComparable >
+SortedListRBT::iterator < TComparable >::~iterator () {
 
 }
 
-template < typename TElem >
-void SortedListRBT < TElem >::iterator::prev () {
-
-}
-
-template < typename TElem >
-typename SortedListRBT < TElem >::iterator & SortedListRBT < TElem >::iterator::operator= (
-        const SortedListRBT::iterator & other ) {
+template < typename TComparable >
+AIterator & SortedListRBT < TComparable >::iterator::operator= ( const AIterator & other ) {
     this->_current = other.get_current ();
     return *this;
 }
 
-#endif //PROJECTDSA_SORTEDLISTRBT_H
+template < typename TComparable >
+bool SortedListRBT < TComparable >::iterator::operator== ( const AIterator & other ) const {
+    return this->_current == other.get_current ();
+}
 
+template < typename TComparable >
+bool SortedListRBT < TComparable >::iterator::operator!= ( const AIterator & other ) const {
+    return !operator== ( other );
+}
+
+template < typename TComparable >
+AIterator & SortedListRBT < TComparable >::iterator::operator++ () {
+    this->next ();
+    return *this;
+}
+
+template < typename TComparable >
+AIterator & SortedListRBT < TComparable >::iterator::operator+ ( const int & value ) {
+    for ( int i = 0; i < value; ++i )
+        this->next ();
+    return *this;
+}
+
+template < typename TComparable >
+TComparable & SortedListRBT < TComparable >::iterator::operator* () const {
+    return *this->_current;
+}
+
+template < typename TComparable >
+void SortedListRBT < TComparable >::iterator::next () {
+
+}
+
+#endif //PROJECTDSA_SORTEDLISTRBT_H

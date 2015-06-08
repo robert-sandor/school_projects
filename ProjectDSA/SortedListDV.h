@@ -60,6 +60,9 @@ public:
 
     void add ( const TElem & element );
 
+
+    virtual void remove ( const TElem & element ) override;
+
     void remove ( const iterator & iter );
 
     void remove_from_index ( const unsigned int & index );
@@ -108,12 +111,12 @@ void SortedListDV < TElem >::add ( const TElem & element ) {
         extend ();
     }
 
-    int position = 0;
+    unsigned int position = 0;
     while ( _elements[ position ] < element && position < _count ) {
         ++position;
     }
 
-    for ( int i = _count; i > position; --i ) {
+    for ( unsigned int i = _count; i > position; --i ) {
         _elements[ i ] = _elements[ i - 1 ];
     }
     _elements[ position ] = element;
@@ -171,6 +174,12 @@ bool SortedListDV < TElem >::is_empty () const {
 }
 
 template < typename TElem >
+void SortedListDV < TElem >::remove ( const TElem & element ) {
+    SortedListDV < TElem >::iterator it = this->find ( element );
+    this->remove ( it );
+}
+
+template < typename TElem >
 void SortedListDV < TElem >::remove ( const SortedListDV < TElem >::iterator & iter ) {
     remove_from_index (( unsigned ) ( iter.get_current () - _elements ));
 }
@@ -184,7 +193,7 @@ typename SortedListDV < TElem >::iterator SortedListDV < TElem >::find ( const T
 template < typename TElem >
 void SortedListDV < TElem >::extend () {
     _capacity += 10;
-    _elements = ( int * ) realloc ( _elements, _capacity * sizeof ( TElem ));
+    _elements = ( TElem * ) realloc ( _elements, _capacity * sizeof ( TElem ));
     if ( NULL == _elements ) {
         throw std::runtime_error ( "Extend failed!" );
     }
@@ -285,5 +294,6 @@ template < typename TElem >
 void SortedListDV < TElem >::iterator::prev () {
     --this->_current;
 }
+
 
 #endif //PROJECTDSA_SORTEDLISTDV_H
