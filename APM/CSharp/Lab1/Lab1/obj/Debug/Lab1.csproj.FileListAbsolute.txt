@@ -1,0 +1,6 @@
+F:\Documents\school_projects\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.exe.config
+F:\Documents\school_projects\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+F:\Documents\school_projects\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.exe
+F:\Documents\school_projects\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.pdb
+F:\Documents\school_projects\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.exe
+F:\Documents\school_projects\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.pdb
