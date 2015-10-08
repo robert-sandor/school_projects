@@ -1,4 +1,4 @@
-// 4. Determina numerele prime p1 si p2 gemene imediat superioare numarului   natural nenul n dat. Doua numere prime p si q sunt gemene  daca q-p = 2.
+// 4. Determina numerele prime p1 si p2 gemene imediat superioare numarului natural nenul n dat. Doua numere prime p si q sunt gemene  daca q-p = 2.
 
 package ro.sando;
 
@@ -15,6 +15,10 @@ public class Main {
 }
 
 class App {
+    /**
+     * Runs the app
+     * @param args - arguments passed through the console
+     */
     public void run(String[] args) {
         // ask for a number
         System.out.print("Enter a number : ");
@@ -61,6 +65,9 @@ class App {
      * @return true / false - the number is prime / is not prime
      */
     public boolean isPrime(int x) {
+        if ( x <= 1 ) {
+            return false;
+        }
         if ( x % 2 == 0 ) {
             return false;
         }
