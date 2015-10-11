@@ -10,3 +10,9 @@ E:\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.pdb
 E:\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.exe
 E:\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.pdb
 E:\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+E:\GitHub\school_projects\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.exe.config
+E:\GitHub\school_projects\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.exe
+E:\GitHub\school_projects\APM\CSharp\Lab1\Lab1\bin\Debug\Lab1.pdb
+E:\GitHub\school_projects\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+E:\GitHub\school_projects\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.exe
+E:\GitHub\school_projects\APM\CSharp\Lab1\Lab1\obj\Debug\Lab1.pdb
