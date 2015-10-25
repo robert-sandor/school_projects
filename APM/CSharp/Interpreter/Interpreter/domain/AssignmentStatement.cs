@@ -2,36 +2,25 @@
 {
     public class AssignmentStatement : IStatement
     {
-        private string _variableId;
-        private Expression _exp;
-
         public AssignmentStatement()
         {
-            _variableId = null;
-            _exp = null;
+            VariableId = null;
+            Exp = null;
         }
 
         public AssignmentStatement(string variableId, Expression exp)
         {
-            _variableId = variableId;
-            _exp = exp;
+            VariableId = variableId;
+            Exp = exp;
         }
 
-        public string VariableId
-        {
-            get { return _variableId; }
-            set { _variableId = value; }
-        }
+        public string VariableId { get; set; }
 
-        public Expression Exp
-        {
-            get { return _exp; }
-            set { _exp = value; }
-        }
+        public Expression Exp { get; set; }
 
         public override string ToString()
         {
-            return _variableId + " = " + _exp.ToString();
+            return VariableId + " = " + Exp;
         }
     }
 }

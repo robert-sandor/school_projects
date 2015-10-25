@@ -1,48 +1,31 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Interpreter.domain
+﻿namespace Interpreter.domain
 {
     public class IfStatement : IStatement
     {
-        private Expression _exp;
-        private IStatement _thenStatement;
-        private IStatement _elseStatement;
-
         public IfStatement()
         {
-            _exp = null;
-            _thenStatement = null;
-            _elseStatement = null;
+            Exp = null;
+            ThenStatement = null;
+            ElseStatement = null;
         }
 
         public IfStatement(Expression exp, IStatement thenStatement, IStatement elseStatement)
         {
-            _exp = exp;
-            _thenStatement = thenStatement;
-            _elseStatement = elseStatement;
+            Exp = exp;
+            ThenStatement = thenStatement;
+            ElseStatement = elseStatement;
         }
 
-        public Expression Exp
-        {
-            get { return _exp; }
-            set { _exp = value; }
-        }
+        public Expression Exp { get; set; }
 
-        public IStatement ThenStatement
-        {
-            get { return _thenStatement; }
-            set { _thenStatement = value; }
-        }
+        public IStatement ThenStatement { get; set; }
 
-        public IStatement ElseStatement
-        {
-            get { return _elseStatement; }
-            set { _elseStatement = value; }
-        }
+        public IStatement ElseStatement { get; set; }
 
         public override string ToString()
         {
-            return "IF ( " + _exp.ToString() + " ) THEN ( " + _thenStatement.ToString() + " ) ELSE ( " + _elseStatement.ToString() + " )";
+            return "IF ( " + Exp + " ) THEN ( " + ThenStatement.ToString() + " ) ELSE ( " + ElseStatement.ToString() +
+                   " )";
         }
     }
 }

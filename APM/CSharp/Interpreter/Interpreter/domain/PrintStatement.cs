@@ -2,27 +2,21 @@
 {
     public class PrintStatement : IStatement
     {
-        private Expression _exp;
-
         public PrintStatement()
         {
-            _exp = null;
+            Exp = null;
         }
 
         public PrintStatement(Expression exp)
         {
-            _exp = exp;
+            Exp = exp;
         }
 
-        public Expression Exp
-        {
-            get { return _exp; }
-            set { _exp = value; }
-        }
+        public Expression Exp { get; set; }
 
         public override string ToString()
         {
-            return "print ( " + _exp.ToString() + " )";
+            return "print ( " + Exp + " )";
         }
     }
 }

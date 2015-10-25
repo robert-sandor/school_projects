@@ -5,9 +5,9 @@ namespace Interpreter.domain
     public class MyDictionary : MyIDictionary
     {
         private const int Capacity = 50;
+        private readonly string[] _keys;
         private int _size;
-        private string[] _keys;
-        private object[] _values;
+        private readonly object[] _values;
 
         public MyDictionary()
         {
@@ -60,18 +60,15 @@ namespace Interpreter.domain
             {
                 return _values[i];
             }
-            else
-            {
-                throw new Exception("Key not found!");
-            }
+            throw new Exception("Key not found!");
         }
 
-        public string ToString()
+        public override string ToString()
         {
             var o = "{ size = " + _size + "\n";
             for (var i = 0; i < _size; i++)
             {
-                o += _keys[i] + " => " + _values[i].ToString() + "\n";
+                o += _keys[i] + " => " + _values[i] + "\n";
             }
             o += "};";
             return o;

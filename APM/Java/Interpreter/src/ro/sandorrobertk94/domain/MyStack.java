@@ -16,11 +16,6 @@ public class MyStack implements MyIStack {
     }
 
     @Override
-    public int size() {
-        return top;
-    }
-
-    @Override
     public boolean isEmpty() {
         return top == 0;
     }
@@ -55,7 +50,7 @@ public class MyStack implements MyIStack {
     @Override
     public String toString() {
         String out = "( \n";
-        for (int i = top-1; i >= 0; i--) {
+        for (int i = top-1; i >= 0; i--)     {
             out += "\t" + stackArray[i].toString() + "\n";
         }
         out += ");";

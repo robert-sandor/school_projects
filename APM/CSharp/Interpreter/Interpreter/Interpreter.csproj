@@ -43,16 +43,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\Controller.cs" />
+    <Compile Include="domain\ArithmeticExpression.cs" />
     <Compile Include="domain\AssignmentStatement.cs" />
     <Compile Include="domain\CompoundStatement.cs" />
+    <Compile Include="domain\ConstantExpression.cs" />
     <Compile Include="domain\Expression.cs" />
     <Compile Include="domain\IfStatement.cs" />
+    <Compile Include="domain\MyIList.cs" />
     <Compile Include="domain\IStatement.cs" />
     <Compile Include="domain\MyDictionary.cs" />
     <Compile Include="domain\MyIDictionary.cs" />
+    <Compile Include="domain\MyIStack.cs" />
+    <Compile Include="domain\MyList.cs" />
+    <Compile Include="domain\MyStack.cs" />
     <Compile Include="domain\PrintStatement.cs" />
+    <Compile Include="domain\ProgramState.cs" />
+    <Compile Include="domain\VariableExpression.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="repository\IRepository.cs" />
+    <Compile Include="repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

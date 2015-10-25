@@ -2,36 +2,25 @@
 {
     public class CompoundStatement : IStatement
     {
-        private IStatement firstStatement;
-        private IStatement secondStatement;
-
         public CompoundStatement()
         {
-            this.firstStatement = null;
-            this.secondStatement = null;
+            FirstStatement = null;
+            SecondStatement = null;
         }
 
         public CompoundStatement(IStatement firstStatement, IStatement secondStatement)
         {
-            this.firstStatement = firstStatement;
-            this.secondStatement = secondStatement;
+            FirstStatement = firstStatement;
+            SecondStatement = secondStatement;
         }
 
-        public IStatement FirstStatement
-        {
-            get { return firstStatement; }
-            set { firstStatement = value; }
-        }
+        public IStatement FirstStatement { get; set; }
 
-        public IStatement SecondStatement
-        {
-            get { return secondStatement; }
-            set { secondStatement = value; }
-        }
+        public IStatement SecondStatement { get; set; }
 
         public override string ToString()
         {
-            return "( " + this.firstStatement.ToString() + " ; " + this.secondStatement.ToString() + " )";
+            return "( " + FirstStatement.ToString() + " ; " + SecondStatement.ToString() + " )";
         }
     }
 }
