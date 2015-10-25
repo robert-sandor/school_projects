@@ -6,7 +6,5 @@ package ro.sandorrobertk94.domain;
 public abstract class Expression {
     public abstract String toString();
 
-    public int eval() {
-        return 0;
-    }
+    public abstract Integer eval(MyIDictionary symbolTable);
 }

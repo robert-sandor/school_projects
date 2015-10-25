@@ -50,13 +50,13 @@ public class ArithmeticExpression extends Expression {
 
     @Override
     public String toString() {
-        String sop;
+        String sop = "";
         switch (this.op) {
             case ADD: {
                 sop = "+";
                 break;
             }
-            case DIV: {
+            case SUB: {
                 sop = "-";
                 break;
             }
@@ -64,11 +64,35 @@ public class ArithmeticExpression extends Expression {
                 sop = "*";
                 break;
             }
+            case DIV: {
+                sop = "/";
+                break;
+            }
         }
+        return exp1.toString() + sop + exp2.toString();
     }
 
     @Override
-    public int eval() {
-        return super.eval();
+    public Integer eval(MyIDictionary symbolTable) {
+        int result = 0;
+        switch (this.op) {
+            case ADD: {
+                result = exp1.eval(symbolTable) + exp2.eval(symbolTable);
+                break;
+            }
+            case SUB: {
+                result = exp1.eval(symbolTable) - exp2.eval(symbolTable);
+                break;
+            }
+            case MULT: {
+                result = exp1.eval(symbolTable) * exp2.eval(symbolTable);
+                break;
+            }
+            case DIV: {
+                result = exp1.eval(symbolTable) / exp2.eval(symbolTable);
+                break;
+            }
+        }
+        return result;
     }
 }
