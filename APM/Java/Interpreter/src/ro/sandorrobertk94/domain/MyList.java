@@ -1,7 +1,5 @@
 package ro.sandorrobertk94.domain;
 
-import java.util.Arrays;
-
 /**
  * Created by robert on 10/25/15.
  */
@@ -10,10 +8,15 @@ public class MyList implements MyIList {
     private int size;
     private Object[] objList;
 
-    @Override
-    public void add() {
+    public MyList() {
         size = 0;
         objList = new Object[CAPACITY];
+    }
+
+    @Override
+    public void add(Object obj) {
+        objList[size] = obj;
+        size++;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class MyList implements MyIList {
     public String toString() {
         String out = "[ size =" + size + "\n";
         for (int i = 0; i < size; i++) {
-            out += objList[i].toString() + "\n";
+            out += "\t" + objList[i].toString() + "\n";
         }
         out += "];";
         return out;

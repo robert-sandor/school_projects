@@ -6,7 +6,7 @@ package ro.sandorrobertk94.domain;
 public class VariableExpression extends Expression {
     String variableID;
 
-    public VariableExpression(String variableID, int value) {
+    public VariableExpression(String variableID) {
         this.variableID = variableID;
     }
 

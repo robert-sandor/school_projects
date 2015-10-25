@@ -20,7 +20,7 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public ProgramState getProgState(int pos) {
+    public ProgramState getCurrentProgram(int pos) {
         if (pos < numberOfPrograms) {
             return programs[pos];
         }

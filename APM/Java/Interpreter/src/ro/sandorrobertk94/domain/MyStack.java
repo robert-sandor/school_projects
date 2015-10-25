@@ -55,8 +55,8 @@ public class MyStack implements MyIStack {
     @Override
     public String toString() {
         String out = "( \n";
-        for (int i = 0; i < top; i++) {
-            out += stackArray[i].toString() + "\n";
+        for (int i = top-1; i >= 0; i--) {
+            out += "\t" + stackArray[i].toString() + "\n";
         }
         out += ");";
         return out;

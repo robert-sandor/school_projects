@@ -63,7 +63,7 @@ public class MyDictionary implements MyIDictionary {
     public String toString() {
         String out = "{ size = " + size + "\n";
         for (int i = 0; i < size; i++) {
-            out += keys[i] + " => " + values[i].toString() + "\n";
+            out += "\t" + keys[i] + " => " + values[i].toString() + "\n";
         }
         out += "};";
         return out;

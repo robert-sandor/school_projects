@@ -47,4 +47,12 @@ public class ProgramState {
     public void setOriginalProgram(IStatement originalProgram) {
         this.originalProgram = originalProgram;
     }
+
+    @Override
+    public String toString() {
+        return "PROGRAM STATE => {{{\n execStack : " +
+                executionStack.toString() + "\n symbolTable : " +
+                symbolTable.toString() + "\n output : " +
+                out.toString() + "\n}}}\n";
+    }
 }
