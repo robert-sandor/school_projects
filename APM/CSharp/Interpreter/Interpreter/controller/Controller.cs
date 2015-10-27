@@ -1,24 +1,24 @@
-﻿using System;
-using Interpreter.domain;
+﻿using Interpreter.domain;
 using Interpreter.repository;
 
 namespace Interpreter.controller
 {
     public class Controller
     {
-        private readonly IRepository repo;
-
         public Controller(IRepository repo)
         {
-            this.repo = repo;
+            Repo = repo;
         }
 
-        public void OneStep(ProgramState state)
+        public IRepository Repo { get; }
+
+        public string OneStep(ProgramState state)
         {
+            var output = "";
             var stack = state.ExecutionStack;
             if (stack.IsEmpty())
             {
-                return;
+                return output;
             }
 
             var currentStatement = (IStatement) stack.Pop();
@@ -27,7 +27,6 @@ namespace Interpreter.controller
                 var s = (CompoundStatement) currentStatement;
                 stack.Push(s.SecondStatement);
                 stack.Push(s.FirstStatement);
-                return;
             }
 
             if (currentStatement is AssignmentStatement)
@@ -38,7 +37,6 @@ namespace Interpreter.controller
                 var symbolTable = state.SymbolTable;
                 var val = exp.Eval(symbolTable);
                 symbolTable.Add(id, val);
-                return;
             }
 
             if (currentStatement is IfStatement)
@@ -55,7 +53,6 @@ namespace Interpreter.controller
                 {
                     stack.Push(s.ElseStatement);
                 }
-                return;
             }
 
             if (currentStatement is PrintStatement)
@@ -66,17 +63,19 @@ namespace Interpreter.controller
                 var val = exp.Eval(symbolTable);
                 state.Output.Add(val.ToString());
             }
+            return output;
         }
 
-        public void AllStep()
+        public string AllStep()
         {
-            var state = repo.GetCurentProgramState(0);
-            Console.WriteLine(state.ToString());
+            var state = Repo.GetCurentProgramState(0);
+            var output = state + "\n";
             while (!state.ExecutionStack.IsEmpty())
             {
                 OneStep(state);
-                Console.WriteLine(state.ToString());
+                output += state + "\n";
             }
+            return output;
         }
     }
 }

@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd6b6dd4-8b37-45d8-82e4-820ff5a6507c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/.vs/Lab1/v14/.suo" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/.vs/Lab1/v14/.suo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Lab1/ro/sando/App.class" afterPath="$PROJECT_DIR$/out/production/Lab1/ro/sando/App.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/bin/Debug/Lab1.exe" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/bin/Debug/Lab1.exe" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/Lab1.exe" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/Lab1.exe" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/bin/Debug/Lab1.pdb" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/bin/Debug/Lab1.pdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/Lab1.pdb" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/Lab1.pdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/Lab1.csproj.FileListAbsolute.txt" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/obj/Debug/Lab1.csproj.FileListAbsolute.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/bin/Debug/Lab1.vshost.exe.manifest" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/bin/Debug/Lab1.vshost.exe.manifest" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ro/sando/Main.java" afterPath="$PROJECT_DIR$/src/ro/sando/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/Program.cs" afterPath="$PROJECT_DIR$/../../CSharp/Lab1/Lab1/Program.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/view/ConsoleUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/controller/Controller.class" afterPath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/controller/Controller.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/repository/IRepository.class" afterPath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/repository/IRepository.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/Main.class" afterPath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/domain/MyIStack.class" afterPath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/domain/MyIStack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/domain/MyStack.class" afterPath="$PROJECT_DIR$/../Interpreter/out/production/Interpreter/ro/sandorrobertk94/domain/MyStack.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/controller/Controller.java" afterPath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/controller/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/repository/IRepository.java" afterPath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/repository/IRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/Main.java" afterPath="$PROJECT_DIR$/../Interpreter/src/ro/sandorrobertk94/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Interpreter/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Interpreter/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Lab1.iws" />
@@ -38,11 +37,9 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ro/sando/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36809817">
+            <state vertical-scroll-proportion="0.0">
               <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,9 +65,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="24" />
-    <option name="width" value="1920" />
-    <option name="height" value="1056" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1874" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -95,8 +93,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -108,6 +104,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -285,8 +283,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -297,7 +295,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25565124" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -339,9 +337,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -349,9 +345,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -359,9 +353,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -369,9 +361,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -379,19 +369,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ro/sando/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36809817">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ro/sando/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ro/sando/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>

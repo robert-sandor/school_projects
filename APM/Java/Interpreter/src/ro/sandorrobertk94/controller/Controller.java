@@ -7,16 +7,26 @@ import ro.sandorrobertk94.repository.IRepository;
  * Created by Robert on 10/25/2015.
  */
 public class Controller {
+    public IRepository getRepo() {
+        return repo;
+    }
+
+    public void setRepo(IRepository repo) {
+        this.repo = repo;
+    }
+
     private IRepository repo;
 
     public Controller(IRepository repo) {
         this.repo = repo;
     }
 
-    public void oneStep(ProgramState state) {
+    public String oneStep(ProgramState state) {
         MyIStack stack = state.getExecutionStack();
+        String output = "";
+
         if (stack.isEmpty()) {
-            return;
+            return output;
         }
 
         IStatement currentStatement = (IStatement) stack.pop();
@@ -24,7 +34,6 @@ public class Controller {
             CompoundStatement s = (CompoundStatement) currentStatement;
             stack.push(s.getSecondStatement());
             stack.push(s.getFirstStatement());
-            return;
         }
 
         if (currentStatement instanceof AssignmentStatement) {
@@ -34,7 +43,6 @@ public class Controller {
             MyIDictionary symbolTable = state.getSymbolTable();
             int val = exp.eval(symbolTable);
             symbolTable.add(id, val);
-            return;
         }
 
         if (currentStatement instanceof IfStatement) {
@@ -47,7 +55,6 @@ public class Controller {
             } else {
                 stack.push(s.getElseStatement());
             }
-            return;
         }
 
         if (currentStatement instanceof PrintStatement) {
@@ -57,14 +64,17 @@ public class Controller {
             int val = exp.eval(symbolTable);
             state.getOut().add(Integer.toString(val));
         }
+        return output;
     }
 
-    public void allStep() {
+    public String allStep() {
         ProgramState state = repo.getCurrentProgram(0);
-        System.out.println(state.toString());
+        String output = "";
+        output += state.toString() + "\n";
         while (!state.getExecutionStack().isEmpty()) {
             oneStep(state);
-            System.out.println(state.toString());
+            output += state.toString() + "\n";
         }
+        return output;
     }
 }
