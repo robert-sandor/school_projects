@@ -1,6 +1,9 @@
 ﻿using System;
 using Interpreter.controller;
 using Interpreter.domain;
+using Interpreter.domain.adts;
+using Interpreter.domain.expressions;
+using Interpreter.domain.statements;
 
 namespace Interpreter.view
 {

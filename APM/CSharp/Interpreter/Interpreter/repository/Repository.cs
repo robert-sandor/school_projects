@@ -4,8 +4,8 @@ namespace Interpreter.repository
 {
     public class Repository : IRepository
     {
-        private ProgramState[] programs;
         private int numberOfPrograms;
+        private readonly ProgramState[] programs;
 
         public Repository()
         {

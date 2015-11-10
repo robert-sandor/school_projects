@@ -1,13 +1,24 @@
 package ro.sandorrobertk94.view;
 
-import ro.sandorrobertk94.controller.Controller;
-import ro.sandorrobertk94.domain.*;
-import ro.sandorrobertk94.repository.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
+
+import ro.sandorrobertk94.controller.Controller;
+import ro.sandorrobertk94.domain.ProgramState;
+import ro.sandorrobertk94.domain.adts.MyDictionary;
+import ro.sandorrobertk94.domain.adts.MyList;
+import ro.sandorrobertk94.domain.adts.MyStack;
+import ro.sandorrobertk94.domain.expressions.ArithmeticExpression;
+import ro.sandorrobertk94.domain.expressions.ConstExpression;
+import ro.sandorrobertk94.domain.expressions.Expression;
+import ro.sandorrobertk94.domain.expressions.VariableExpression;
+import ro.sandorrobertk94.domain.statements.AssignmentStatement;
+import ro.sandorrobertk94.domain.statements.CompoundStatement;
+import ro.sandorrobertk94.domain.statements.IStatement;
+import ro.sandorrobertk94.domain.statements.IfStatement;
+import ro.sandorrobertk94.domain.statements.PrintStatement;
+import ro.sandorrobertk94.domain.statements.WhileStatement;
 
 /**
  * Created by Robert on 10/26/2015.
@@ -160,6 +171,18 @@ public class ConsoleUI {
                 ((PrintStatement) statement).setExp(exp);
                 break;
             }
+            case 5: {
+                statement = new WhileStatement();
+                System.out.println("Input expression : ");
+                Expression exp = inputExpression();
+                System.out.println("Input statement : ");
+                IStatement st = inputStatement();
+                if (exp == null || st == null) {
+                    return null;
+                }
+                ((WhileStatement) statement).setExp(exp);
+                ((WhileStatement) statement).setStatement(st);
+            }
             default: {
                 System.out.println("!! Invalid Option !!");
                 return null;
@@ -289,6 +312,7 @@ public class ConsoleUI {
         System.out.println("2. Assignment");
         System.out.println("3. If Statement");
         System.out.println("4. Print Statement");
+        System.out.println("5. While Statement");
     }
 
     private void printExpressionMenu() {
